@@ -1,0 +1,302 @@
+openapi: 3.0.3
+info:
+  title: estudianteController
+  description: >
+    API REST para la gestión de estudiantes.
+    Permite crear, consultar, actualizar y eliminar registros de estudiantes.
+  version: 1.0.0
+  contact:
+    name: Juan Sosa, Joan Diaz, Juan Cardenas
+
+servers:
+  - url: http://localhost:8080
+    description: Servidor de desarrollo local
+
+tags:
+  - name: Estudiantes
+    description: Operaciones sobre el recurso Estudiante
+
+paths:
+  /estudiantes:
+    get:
+      tags:
+        - Estudiantes
+      summary: Obtener todos los estudiantes
+      operationId: getAll
+      responses:
+        '200':
+          description: Lista de estudiantes obtenida exitosamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Estudiante'
+              example:
+                - id: 1
+                  nombres: "María López"
+                  correo: "maria.lopez@universidad.edu.co"
+                  numeroTelefono: "3101234567"
+                  carrera: "Ingeniería de Sistemas"
+                  direccion: "Calle 10 # 5-20, Ibagué"
+                  semestre: "Séptimo"
+                  activo: true
+
+    post:
+      tags:
+        - Estudiantes
+      summary: Crear un nuevo estudiante
+      operationId: save
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EstudianteRequest'
+            example:
+              nombres: "Carlos Pérez"
+              correo: "carlos.perez@universidad.edu.co"
+              numeroTelefono: "3209876543"
+              carrera: "Ingeniería de Sistemas"
+              direccion: "Carrera 5 # 10-30, Ibagué"
+              semestre: "Quinto"
+              activo: true
+      responses:
+        '200':
+          description: Estudiante creado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Estudiante'
+        '409':
+          description: Conflicto — ya existe un estudiante con ese correo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /estudiantes/{id}:
+    put:
+      tags:
+        - Estudiantes
+      summary: Actualizar un estudiante existente
+      operationId: update
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID único del estudiante
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EstudianteRequest'
+            example:
+              nombres: "Carlos Pérez Actualizado"
+              correo: "carlos.perez@universidad.edu.co"
+              numeroTelefono: "3209876543"
+              carrera: "Ingeniería de Sistemas"
+              direccion: "Avenida 13 # 7-15, Ibagué"
+              semestre: "Sexto"
+              activo: true
+      responses:
+        '200':
+          description: Estudiante actualizado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Estudiante'
+        '404':
+          description: Estudiante no encontrado (el id no existe)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                message: "No existe el estudiante"
+                status: 404
+                timestamp: "2026-06-09T02:43:52.962Z"
+                error: "Not Found"
+                path: "/estudiantes/1"
+        '409':
+          description: Conflicto — ya existe un estudiante con ese correo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    get:
+      tags:
+        - Estudiantes
+      summary: Obtener un estudiante por ID
+      operationId: getStudentById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID único del estudiante
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: Estudiante encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Estudiante'
+        '404':
+          description: Estudiante no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                message: "No existe el estudiante"
+                status: 404
+                timestamp: "2026-06-09T02:43:52.962Z"
+                error: "Not Found"
+                path: "/estudiantes/1"
+
+    delete:
+      tags:
+        - Estudiantes
+      summary: Eliminar un estudiante por ID
+      operationId: delete
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID único del estudiante a eliminar
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '204':
+          description: Estudiante eliminado exitosamente (sin contenido)
+        '404':
+          description: Estudiante no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                message: "No existe el estudiante"
+                status: 404
+                timestamp: "2026-06-09T02:43:52.962Z"
+                error: "Not Found"
+                path: "/estudiantes/1"
+
+components:
+  schemas:
+
+    Estudiante:
+      type: object
+      description: Entidad completa del estudiante, incluye ID generado por la base de datos
+      properties:
+        id:
+          type: integer
+          description: Identificador único autogenerado
+          example: 1
+          readOnly: true
+        nombres:
+          type: string
+          maxLength: 50
+          description: Nombres del estudiante
+          example: "María López"
+        correo:
+          type: string
+          maxLength: 50
+          description: Correo electrónico único del estudiante
+          example: "maria.lopez@universidad.edu.co"
+        numeroTelefono:
+          type: string
+          maxLength: 30
+          description: Número de teléfono de contacto
+          example: "3101234567"
+        carrera:
+          type: string
+          maxLength: 60
+          description: Carrera universitaria que cursa el estudiante
+          example: "Ingeniería de Sistemas"
+        direccion:
+          type: string
+          maxLength: 70
+          description: Dirección de residencia del estudiante
+          example: "Calle 10 # 5-20, Ibagué"
+        semestre:
+          type: string
+          maxLength: 50
+          description: Semestre actual del estudiante
+          example: "Séptimo"
+        activo:
+          type: boolean
+          description: Indica si el estudiante está activo en el sistema
+          example: true
+      required:
+        - nombres
+        - correo
+        - numeroTelefono
+        - carrera
+        - direccion
+        - semestre
+        - activo
+
+    EstudianteRequest:
+      type: object
+      description: Cuerpo de solicitud para crear un estudiante (sin ID)
+      properties:
+        nombres:
+          type: string
+          maxLength: 50
+          example: "Carlos Pérez"
+        correo:
+          type: string
+          maxLength: 50
+          example: "carlos.perez@universidad.edu.co"
+        numeroTelefono:
+          type: string
+          maxLength: 30
+          example: "3209876543"
+        carrera:
+          type: string
+          maxLength: 60
+          example: "Ingeniería de Sistemas"
+        direccion:
+          type: string
+          maxLength: 70
+          example: "Carrera 5 # 10-30, Ibagué"
+        semestre:
+          type: string
+          maxLength: 50
+          example: "Quinto"
+        activo:
+          type: boolean
+          example: true
+      required:
+        - nombres
+        - correo
+        - numeroTelefono
+        - carrera
+        - direccion
+        - semestre
+        - activo
+
+    ErrorResponse:
+      type: object
+      description: Mensaje de excepciones
+      properties:
+        timestamp:
+          type: string
+          example: "2026-06-09T02:43:52.962Z"
+        status:
+          type: integer
+          example: 409
+        error:
+          type: string
+          example: "Conflict"
+        path:
+          type: string
+          example: "/estudiantes"
