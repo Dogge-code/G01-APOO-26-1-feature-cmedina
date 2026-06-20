@@ -571,7 +571,6 @@ components:
         - carrera
         - direccion
 
-    ErrorResponse:
       type: object
       description: Mensaje de excepciones
       properties:
