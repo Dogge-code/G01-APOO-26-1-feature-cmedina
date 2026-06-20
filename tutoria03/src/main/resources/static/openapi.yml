@@ -191,128 +191,6 @@ paths:
                 timestamp: "2026-06-09T02:43:52.962Z"
                 error: "Not Found"
                 path: "/estudiantes/1"
-
-components:
-  schemas:
-
-    Estudiante:
-      type: object
-      description: Entidad completa del estudiante, incluye ID generado por la base de datos
-      properties:
-        id:
-          type: integer
-          description: Identificador único autogenerado
-          example: 1
-          readOnly: true
-        nombres:
-          type: string
-          maxLength: 50
-          description: Nombres del estudiante
-          example: "María López"
-        correo:
-          type: string
-          maxLength: 50
-          description: Correo electrónico único del estudiante
-          example: "maria.lopez@universidad.edu.co"
-        numeroTelefono:
-          type: string
-          maxLength: 30
-          description: Número de teléfono de contacto
-          example: "3101234567"
-        carrera:
-          type: string
-          maxLength: 60
-          description: Carrera universitaria que cursa el estudiante
-          example: "Ingeniería de Sistemas"
-        direccion:
-          type: string
-          maxLength: 70
-          description: Dirección de residencia del estudiante
-          example: "Calle 10 # 5-20, Ibagué"
-        semestre:
-          type: string
-          maxLength: 50
-          description: Semestre actual del estudiante
-          example: "Séptimo"
-        activo:
-          type: boolean
-          description: Indica si el estudiante está activo en el sistema
-          example: true
-      required:
-        - nombres
-        - correo
-        - numeroTelefono
-        - carrera
-        - direccion
-        - semestre
-        - activo
-
-    EstudianteRequest:
-      type: object
-      description: Cuerpo de solicitud para crear un estudiante (sin ID)
-      properties:
-        nombres:
-          type: string
-          maxLength: 50
-          example: "Carlos Pérez"
-        correo:
-          type: string
-          maxLength: 50
-          example: "carlos.perez@universidad.edu.co"
-        numeroTelefono:
-          type: string
-          maxLength: 30
-          example: "3209876543"
-        carrera:
-          type: string
-          maxLength: 60
-          example: "Ingeniería de Sistemas"
-        direccion:
-          type: string
-          maxLength: 70
-          example: "Carrera 5 # 10-30, Ibagué"
-        semestre:
-          type: string
-          maxLength: 50
-          example: "Quinto"
-        activo:
-          type: boolean
-          example: true
-      required:
-        - nombres
-        - correo
-        - numeroTelefono
-        - carrera
-        - direccion
-        - semestre
-        - activo
-
-    ErrorResponse:
-      type: object
-      description: Mensaje de excepciones
-      properties:
-        timestamp:
-          type: string
-          example: "2026-06-09T02:43:52.962Z"
-        status:
-          type: integer
-          example: 409
-        error:
-          type: string
-          example: "Conflict"
-        path:
-          type: string
-          example: "/estudiantes"
-
-
-
-description: >
-  API REST para la gestión de docentes.
-  Permite crear, consultar, actualizar y eliminar registros de docentes.
-  version: 1.0.0
-
-
-paths:
   /docentes:
     get:
       tags:
@@ -485,6 +363,125 @@ paths:
                 error: "Not Found"
                 path: "/docentes/1"
 
+
+components:
+  schemas:
+
+    Estudiante:
+      type: object
+      description: Entidad completa del estudiante, incluye ID generado por la base de datos
+      properties:
+        id:
+          type: integer
+          description: Identificador único autogenerado
+          example: 1
+          readOnly: true
+        nombres:
+          type: string
+          maxLength: 50
+          description: Nombres del estudiante
+          example: "María López"
+        correo:
+          type: string
+          maxLength: 50
+          description: Correo electrónico único del estudiante
+          example: "maria.lopez@universidad.edu.co"
+        numeroTelefono:
+          type: string
+          maxLength: 30
+          description: Número de teléfono de contacto
+          example: "3101234567"
+        carrera:
+          type: string
+          maxLength: 60
+          description: Carrera universitaria que cursa el estudiante
+          example: "Ingeniería de Sistemas"
+        direccion:
+          type: string
+          maxLength: 70
+          description: Dirección de residencia del estudiante
+          example: "Calle 10 # 5-20, Ibagué"
+        semestre:
+          type: string
+          maxLength: 50
+          description: Semestre actual del estudiante
+          example: "Séptimo"
+        activo:
+          type: boolean
+          description: Indica si el estudiante está activo en el sistema
+          example: true
+      required:
+        - nombres
+        - correo
+        - numeroTelefono
+        - carrera
+        - direccion
+        - semestre
+        - activo
+
+    EstudianteRequest:
+      type: object
+      description: Cuerpo de solicitud para crear un estudiante (sin ID)
+      properties:
+        nombres:
+          type: string
+          maxLength: 50
+          example: "Carlos Pérez"
+        correo:
+          type: string
+          maxLength: 50
+          example: "carlos.perez@universidad.edu.co"
+        numeroTelefono:
+          type: string
+          maxLength: 30
+          example: "3209876543"
+        carrera:
+          type: string
+          maxLength: 60
+          example: "Ingeniería de Sistemas"
+        direccion:
+          type: string
+          maxLength: 70
+          example: "Carrera 5 # 10-30, Ibagué"
+        semestre:
+          type: string
+          maxLength: 50
+          example: "Quinto"
+        activo:
+          type: boolean
+          example: true
+      required:
+        - nombres
+        - correo
+        - numeroTelefono
+        - carrera
+        - direccion
+        - semestre
+        - activo
+
+    ErrorResponse:
+      type: object
+      description: Mensaje de excepciones
+      properties:
+        timestamp:
+          type: string
+          example: "2026-06-09T02:43:52.962Z"
+        status:
+          type: integer
+          example: 409
+        error:
+          type: string
+          example: "Conflict"
+        path:
+          type: string
+          example: "/estudiantes"
+
+
+
+description: >
+  API REST para la gestión de docentes.
+  Permite crear, consultar, actualizar y eliminar registros de docentes.
+  version: 1.0.0
 
 
 components:
