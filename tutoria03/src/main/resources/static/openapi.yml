@@ -571,7 +571,6 @@ components:
         - carrera
         - direccion
 
-      type: object
       description: Mensaje de excepciones
       properties:
         timestamp:
