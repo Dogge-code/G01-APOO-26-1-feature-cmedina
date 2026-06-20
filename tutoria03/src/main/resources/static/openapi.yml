@@ -475,7 +475,6 @@ components:
         path:
           type: string
           example: "/estudiantes"
-  schemas:
 
     Docente:
       type: object
