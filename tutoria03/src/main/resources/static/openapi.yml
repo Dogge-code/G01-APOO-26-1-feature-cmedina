@@ -304,9 +304,9 @@ components:
 
 info:
  title: docenteController
-  description: >
-    API REST para la gestión de docentes.
-    Permite crear, consultar, actualizar y eliminar registros de docentes.
+description: >
+  API REST para la gestión de docentes.
+  Permite crear, consultar, actualizar y eliminar registros de docentes.
   version: 1.0.0
 
 tags:
