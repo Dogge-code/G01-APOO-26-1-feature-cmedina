@@ -1,9 +1,9 @@
 openapi: 3.0.3
 info:
-  title: estudianteController
+  title: estudiante_docenteController
   description: >
-    API REST para la gestión de estudiantes.
-    Permite crear, consultar, actualizar y eliminar registros de estudiantes.
+    API REST para la gestión de estudiantes y docentes.
+    Permite crear, consultar, actualizar y eliminar registros de estudiantes y docentes.
   version: 1.0.0
   contact:
     name: Joan Diaz, Juan Cardenas
@@ -475,16 +475,6 @@ components:
         path:
           type: string
           example: "/estudiantes"
-
-
-
-description: >
-  API REST para la gestión de docentes.
-  Permite crear, consultar, actualizar y eliminar registros de docentes.
-  version: 1.0.0
-
-
-components:
   schemas:
 
     Docente:
@@ -598,4 +588,10 @@ components:
         path:
           type: string
           example: "/docentes"
+
+
+
+
+
+
 
