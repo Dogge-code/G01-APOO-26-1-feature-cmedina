@@ -350,7 +350,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/EstudianteRequest'
+              $ref: '#/components/schemas/DocenteRequest'
             example:
               nombres: "Andres Andrade"
               correo: "andres.andrade@universidad.edu.co"
@@ -365,7 +365,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Estudiante'
+                $ref: '#/components/schemas/Docente'
         '409':
           description: Conflicto — ya existe un docente con ese correo
           content:
@@ -391,7 +391,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/EstudianteRequest'
+              $ref: '#/components/schemas/DocenteRequest'
             example:
               nombres: "Andres Andrade Actualizado"
               correo: "andres.andrade@universidad.edu.co"
@@ -406,7 +406,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Estudiante'
+                $ref: '#/components/schemas/Docente'
         '404':
           description: Docente no encontrado (el id no existe)
           content:
@@ -444,7 +444,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Estudiante'
+                $ref: '#/components/schemas/Docente'
         '404':
           description: Docente no encontrado
           content:
